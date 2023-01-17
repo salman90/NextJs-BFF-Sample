@@ -5,26 +5,31 @@ import Link from "next/link";
 export default function NavigationBar() {
     const handleLoginPopup = async () => {
         try {
-            const response = await fetch('/api/signin');
+            const response = await fetch('/api/auth/login');
             const data = await response.json();
+            console.log(data, " data")
         } catch (error) {
             console.log(error)
         }
         
+    }
+
+    const handleLogout = async () => {
+        try {
+            const response = await fetch('/api/auth/logout');
+            const data = await response.json();
+             console.log(data, ' data');
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
         <Navbar className="navbarStyle" bg="primary" variant="dark" className="navbarStyle">
             <Link className="navbar-brand" href="/">
                 Microsoft identity platform
             </Link>
-            <Link className="navbarButton" href="/todolist">
-                TodoList
-            </Link>
             <Link className="navbarButton" href="/profile">
                 Profile
-            </Link>
-            <Link className="navbarButton" href="/contacts">
-                Contacts
             </Link>
             <div className="collapse navbar-collapse justify-content-end">
                 <DropdownButton
@@ -36,7 +41,9 @@ export default function NavigationBar() {
                     <Dropdown.Item as="button" onClick={handleLoginPopup}>
                         Sign in using Popup
                     </Dropdown.Item>
-                    <Dropdown.Item as="button">Sign in using Redirect</Dropdown.Item>
+                    <Dropdown.Item as="button" onClick={handleLogout}>
+                        Sign out using Popup
+                    </Dropdown.Item>
                 </DropdownButton>
             </div>
         </Navbar>
