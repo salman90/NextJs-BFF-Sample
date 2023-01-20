@@ -3,8 +3,6 @@ import { Container, Card, Row } from 'react-bootstrap';
 
 import { createClaimsTable } from '../utils/claimUtils';
 
-import '../styles/App.css';
-
 export const IdTokenData = (props) => {
     const tokenClaims = createClaimsTable(props.idTokenClaims);
     const tableRow = Object.keys(tokenClaims).map((key) => {
@@ -60,13 +58,6 @@ export const ProfileData = (props) => {
     return (
         <>
             <div className="data-area-div">
-                <p>
-                    Acquired an <strong>Access Token </strong>for MS Graph with scopes:
-                    {props.response.scopes.map((scope, index) => (
-                        <mark key={scope}>{scope}</mark>
-                    ))}
-                </p>
-
                 <p>
                     Calling <strong>Microsoft Graph API</strong>...
                 </p>

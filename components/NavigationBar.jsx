@@ -2,50 +2,45 @@ import { Navbar, Dropdown, DropdownButton } from 'react-bootstrap';
 import Link from "next/link";
 
 
-export default function NavigationBar() {
-    const handleLoginPopup = async () => {
-        try {
-            const response = await fetch('/api/auth/login');
-            const data = await response.json();
-            console.log(data, " data")
-        } catch (error) {
-            console.log(error)
-        }
-        
-    }
-
-    const handleLogout = async () => {
-        try {
-            const response = await fetch('/api/auth/logout');
-            const data = await response.json();
-             console.log(data, ' data');
-        } catch (error) {
-            console.log(error)
-        }
-    }
+export default function NavigationBar({ account }) {
     return (
-        <Navbar className="navbarStyle" bg="primary" variant="dark" className="navbarStyle">
+        <Navbar className="navbarStyle" bg="primary" variant="dark">
             <Link className="navbar-brand" href="/">
                 Microsoft identity platform
             </Link>
-            <Link className="navbarButton" href="/profile">
-                Profile
-            </Link>
-            <div className="collapse navbar-collapse justify-content-end">
-                <DropdownButton
-                    variant="secondary"
-                    className="justify-content-end ml-auto"
-                    title="Sign In"
-                    drop="start"
-                >
-                    <Dropdown.Item as="button" onClick={handleLoginPopup}>
-                        Sign in using Popup
-                    </Dropdown.Item>
-                    <Dropdown.Item as="button" onClick={handleLogout}>
-                        Sign out using Popup
-                    </Dropdown.Item>
-                </DropdownButton>
-            </div>
+            {account ? (
+                <>
+                    <Link className="navbarButton" href="/profile">
+                        Profile
+                    </Link>
+                    <div className="collapse navbar-collapse justify-content-end">
+                        <DropdownButton variant="warning" drop="start" title={account ? account.name : 'Unknown'}>
+                            <form method="GET" action="/api/auth/logout">
+                                <Dropdown.Item as="button">
+                                    Sign out
+                                </Dropdown.Item>
+                            </form>
+                        </DropdownButton>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className="collapse navbar-collapse justify-content-end">
+                        <DropdownButton
+                            variant="secondary"
+                            className="justify-content-end ml-auto"
+                            title="Sign In"
+                            drop="start"
+                        >
+                            <form method="GET" action="/api/auth/login">
+                                <Dropdown.Item as="button" type="submit">
+                                    Sing in
+                                </Dropdown.Item>
+                            </form>
+                        </DropdownButton>
+                    </div>
+                </>
+            )}
         </Navbar>
     );
 }
