@@ -1,0 +1,58 @@
+{
+    "Sample": {
+        "Title": "NextJs web application using MSAL Node to sign-in users and call Microsoft Graph API",
+        "Level": 300,
+        "Client": "React",
+        "Service": "Node.js web API",
+        "RepositoryUrl": "ms-identity-javascript-react-tutorial",
+        "Endpoint": "AAD v2.0",
+        "Platform": "JavaScript",
+        "Languages": ["javascript", "react"],
+        "Description": "NextJs web application using MSAL Node to sign-in users and call Microsoft Graph API",
+        "products": ["React", "azure-active-directory", "msal-js", "msal-node", "ms-graph"]
+    },
+    "AADApps": [
+        {
+            "Id": "service",
+            "Name": "msal-next-webapp",
+            "Kind": "WebApp",
+            "Audience": "AzureADMyOrg",
+            "HomePage": "http://localhost:3000",
+            "ReplyUrls": "http://localhost:3000/api/auth/redirect",
+            "SampleSubPath": "6-AdvancedScenarios\\1-call-api-bff\\App",
+            "Sdk": "MsalNode",
+            "PasswordCredentials": "Auto",
+            "ManualSteps": [],
+            "OptionalClaims": {
+                "IdTokenClaims": ["acct"]
+            },
+            "RequiredResourcesAccess": [
+                {
+                    "Resource": "Microsoft Graph",
+                    "DelegatedPermissions": ["User.Read"]
+                }
+            ]
+        }
+    ],
+     "CodeConfiguration": [
+        {
+            "App": "service",
+            "SettingKind": "Replace",
+            "SettingFile": "\\..\\APP\\authConfig.js",
+            "Mappings": [
+                {
+                    "key": "Enter_the_Application_Id_Here",
+                    "value":".AppId"
+                },
+                {
+                    "key": "Enter_the_Tenant_Id_Here",
+                    "value": "$tenantId"
+                },
+                {
+                    "key": "Enter_the_Client_Secret_Here",
+                    "value": "service.AppKey"
+                }
+            ]
+        }
+     ]
+}

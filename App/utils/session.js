@@ -1,4 +1,3 @@
-
 export const sessionOptions = {
     password: 'Enter_Your_Session_Password', //Password must be at least 32 characters long
     cookieName: 'Enter_Your_Cookie_Name',
